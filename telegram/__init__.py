@@ -50,9 +50,8 @@ class Bot:
     
     def send_photo(self, chat_id, photo):
         method = 'sendPhoto'
-        params = {'chat_id': chat_id}
-        files = {'photo': photo}
-        resp = requests.post(self.api_url + method, params, files=files)
+        params = {'chat_id': chat_id, 'photo': photo}
+        resp = requests.post(self.api_url + method, params)
         return resp
 
     def send_audio(self, chat_id, audio):

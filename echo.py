@@ -26,17 +26,31 @@ while True:
         # get chat_id
         chat_id = now_update.message.chat.chat_id
         text    = now_update.message.text
+        photo   = now_update.message.photo
 
-        # check text
-        if text == "/start":
-            text = "Hello, I'm a bot!"
-        elif text == "/help":
-            text = "I'm a bot, please talk to me!"
-        else:
-            text = "I don't understand what you mean."
+        # check text is not None
+        if text is not None:
+            # check text
+            if text == "/start":
+                text = "Hello, I'm a bot!"
+            elif text == "/help":
+                text = "I'm a bot, please talk to me!"
+            else:
+                text = "I don't understand what you mean."
 
-        # send message
-        bot.send_message(chat_id, text)
+            # send message
+            bot.send_message(chat_id, text)
+        
+        # check photo
+        elif photo is not None:
+            # get photo
+            photo = photo[-1]
+
+            # get photo file_id
+            file_id = photo['file_id']
+
+            # send photo
+            bot.send_photo(chat_id, file_id)
 
         # update last update
         last_update = now_update
